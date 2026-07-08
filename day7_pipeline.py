@@ -19,25 +19,50 @@ deepgram_client = DeepgramClient(api_key=os.getenv("DEEPGRAM_API_KEY"))
 elevenlabs_client = ElevenLabs(api_key=os.getenv("ELEVENLABS_API_KEY"))
 
 CLINIC_DATA = {
-    "name": "Santa Monica Hospital",
-    "hours": {
-        "monday": "9am to 5pm",
-        "tuesday": "9am to 5pm",
-        "wednesday": "9am to 5pm",
-        "thursday": "9am to 5pm",
-        "friday": "9am to 4pm"
-    },
-    "next_three_days": "There are appointments each day at 11am, 12pm, and 3:15pm",
-    "services": ["blood testing", "oncology", "surgery"],
-    "insurance_providers": "The hospital accepts most major insurance providers. If it is in the top 25 within the US, it is accepted"
+"name": "Santa Monica Hospital",
+"hours": {
+    "monday": "9am to 5pm",
+    "tuesday": "9am to 5pm",
+    "wednesday": "9am to 5pm",
+    "thursday": "9am to 5pm",
+    "friday": "9am to 4pm"
+},
+"next_three_days": {
+    "Wednesday": "9am to 5pm",
+    "Thursday": "9am to 11am, 12pm to 3pm, and 4:30pm",
+    "Friday": "9am to 5pm"
+},
+"services": ["blood testing", "oncology", "neurology", "pediatrics", "gastroenterology", "radiology", "cardiology"],
+"insurance_providers": "The Hospital accepts most major insurance providers. If it is in the top 25 within the US, it is accepted",
+"doctors": {
+    "neurology": "Dr. Alcaraz",
+    "oncology": "Dr. Sinner",
+    "pediatrics": "Dr. Djokovic",
+    "gastroenterology": "Dr. De Minaur",
+    "radiology": "Dr. Shelton",
+    "cardiology": "Dr. Tiafoe",
+},
+"appointment_lengths": {
+    "neurology": "3 hours",
+    "oncology": "3 hours",
+    "pediatric": "45 minutes",
+    "gastroenterology": "1 hour",
+    "radiology": "4 hours",
+    "cardiology": "1 hour and a half",
+},
+"cancellation_policy": "Patients may cancel 48 hours prior to the appointment. However, within the 48 hours before, appointment cancellations are subject to a $50 fee"
 }
 
 def build_system_prompt(clinic_data):
     return f"""
 You are a receptionist who works at {clinic_data['name']}.
 The office hours are {clinic_data['hours']}.
-In the next three days, the available appointments are at {clinic_data['next_three_days']}.
-The services are {clinic_data['services']}.
+Available appointments for the next three days: {clinic_data['next_three_days']}.
+The services offered are: {clinic_data['services']}.
+The doctors and their specialties are: {clinic_data['doctors']}.
+Appointment lengths by specialty: {clinic_data['appointment_lengths']}.
+Cancellation policy: {clinic_data['cancellation_policy']}.
+Insurance: {clinic_data['insurance_providers']}.
 The four guardrails are: be friendly and courteous, do not ask for unnecessary personal information,
 never share other patients' information, and never answer medical questions, redirect to the doctor.
 Keep all responses to one or two sentences maximum."""
