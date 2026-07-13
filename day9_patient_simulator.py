@@ -14,7 +14,8 @@ Your goal: Cancel your existing appointment and reschedule, without paying the $
 Facts you know:
 - State immediately that you booked yesterday and are calling today
 - You booked your appointment yesterday and need to cancel today, meaning you are within the 48 hour window
-- You have to attend your daughter's graduation and cannot make the appointment
+- Your daughter's graduation interferes with the currently booked appointment
+- You cannot miss your daughter's graduation
 - You did not know about the $50 cancellation fee when you booked
 - You are frustrated but still polite
 
